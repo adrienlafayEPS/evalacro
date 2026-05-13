@@ -1,0 +1,25 @@
+{
+  "name": "Enchaînement acrosport — Praticable",
+  "short_name": "Acrosport",
+  "description": "Disposition du praticable, figures et pyramides — mode hors ligne.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12182a",
+  "theme_color": "#1a2235",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-source.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ]
+}
