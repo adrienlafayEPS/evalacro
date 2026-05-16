@@ -1,8 +1,17 @@
 /* Service worker — met en cache l’app pour une utilisation hors ligne après la première visite (HTTP/HTTPS ou localhost). */
 'use strict';
 
-var CACHE_NAME = 'acrosport-offline-v3';
-var PRECACHE_URLS = ['./index.html', './sw.js', './manifest.webmanifest', './icon.svg', './icon-source.png'];
+var CACHE_NAME = 'acrosport-offline-v4';
+var PRECACHE_URLS = [
+  './index.html',
+  './sw.js',
+  './manifest.webmanifest',
+  './icon-source.png',
+  './icon-192.png',
+  './icon-512.png',
+  './apple-touch-icon.png',
+  './favicon-32x32.png'
+];
 
 function precache() {
   return caches.open(CACHE_NAME).then(function (cache) {

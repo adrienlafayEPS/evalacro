@@ -1,25 +1,31 @@
 #!/usr/bin/env bash
-# Synchronise le HTML hors ligne vers le bundle iOS, puis pousse ce dossier vers GitHub (evalacro).
+# Synchronise le HTML + icônes vers le bundle iOS, puis pousse ce dossier vers GitHub (evalacro).
 # Exécuter depuis le Mac :  bash sync-html-ios-github.sh
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 HTML="$ROOT/HTML"
-IOS_DST="$ROOT/Xcode/AcrosportiOS/Resources/index.html"
-SRC_INDEX="$HTML/index.html"
+IOS_RES="$ROOT/Xcode/AcrosportiOS/Resources"
 
-if [[ ! -f "$SRC_INDEX" ]]; then
-  echo "Fichier introuvable : $SRC_INDEX" >&2
-  exit 1
-fi
-if [[ ! -f "$IOS_DST" ]]; then
-  echo "Cible iOS introuvable : $IOS_DST" >&2
-  exit 1
-fi
+ASSETS=(
+  index.html
+  icon-source.png
+  icon-192.png
+  icon-512.png
+  apple-touch-icon.png
+  favicon-32x32.png
+)
 
-echo "→ Copie $SRC_INDEX → $IOS_DST"
-cp "$SRC_INDEX" "$IOS_DST"
-echo "   OK ($(wc -c < "$IOS_DST" | tr -d ' ') octets)"
+mkdir -p "$IOS_RES"
+for f in "${ASSETS[@]}"; do
+  if [[ ! -f "$HTML/$f" ]]; then
+    echo "Fichier introuvable : $HTML/$f" >&2
+    exit 1
+  fi
+  echo "→ Copie $f → bundle iOS"
+  cp "$HTML/$f" "$IOS_RES/$f"
+done
+echo "   OK ($(wc -c < "$IOS_RES/index.html" | tr -d ' ') octets pour index.html)"
 
 cd "$HTML"
 if [[ ! -d .git ]]; then
